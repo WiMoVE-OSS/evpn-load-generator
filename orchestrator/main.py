@@ -45,7 +45,7 @@ def is_reserved(mac_address):
     return False
 
 for i in range(1, 10):
-  client = Client(f"c{i}", generate_mac_addresses(1)[0], feed, 300, 500, 1000, i % 100)
+  client = Client(f"c{i}", generate_mac_addresses(1)[0], feed, 3, 3, 3, i % 100)
   thread = Thread(target=client.run)
   threads.append(thread)
 

@@ -1,11 +1,10 @@
+import os
+from time import sleep
 from multiprocessing.connection import Client
 from queue import Queue
 import random
-import sys
 from message import Message
 from collections import defaultdict
-
-ADDRESS = ("10.242.2.3", 8000)
 
 class EtherPacket:
     def __init__(self, src: str, dst: str, vni: int) -> None:
@@ -31,12 +30,28 @@ class Feed:
     queue: Queue = Queue()
 
     def __init__(self) -> None:
-        pass
+        min_vtep_id = os.environ.get(("MIN_VTEP_ID"))
+        max_vtep_id = os.environ.get(("MAX_VTEP_ID"))
+        if min_vtep_id is None or max_vtep_id is None:
+            print("Min_vtep_id or Max_vtep_id is not configured!")
+            exit(1)
+        self.connections = {}
+        for i in range(int(min_vtep_id), int(max_vtep_id)):
+            while True:
+                try:
+                    conn = Client(self.getAddress(f"{i}"))
+                    break
+                except:
+                    sleep(1)
+            data = conn.recv()
+            for j in range(data["min_vni"], data["max_vni"]):
+                self.vnis[j] += [i]
+            self.connections[i] = conn
+
 
     def __del__(self) -> None:
-        self.conn.send("close")
-        self.conn.close()
-
+        for conn in self.connections.values():
+            conn.close()
     def getAddress(self, vtep: str) -> tuple:
         return (f"/tmp/wmsim/{vtep}.sock")
 
@@ -57,9 +72,8 @@ class Feed:
                     print("no available vtep")
                     continue
                 message.vtep = random.choice(available)
-                conn = Client(self.getAddress(message.vtep))
                 packet = EtherPacket(message.mac,"12:34:56:78:90:12", message.vni)
-                conn.send(packet.toDict())
+                self.connections[message.vtep].send(packet.toDict())
             if message.operation == "CONNECT":
                 vni = message.vni
                 available = self.vnis[vni]
@@ -67,10 +81,8 @@ class Feed:
                     print("no available vtep")
                     continue
                 message.vtep = random.choice(available)
-                conn = Client(self.getAddress(message.vtep))
                 packet = EtherPacket(message.mac,"12:34:56:78:90:12", message.vni)
-                conn.send(packet.toDict())
+                self.connections[message.vtep].send(packet.toDict())
             if message.operation == "KEEPALIVE":
-                conn = Client(self.getAddress(message.vtep))
                 packet = EtherPacket(message.mac,"12:34:56:78:90:12", message.vni)
-                conn.send(packet.toDict())
+                self.connections[message.vtep].send(packet.toDict())

@@ -1,0 +1,27 @@
+version: '3'
+services:
+  vtep:
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  orchestrator:
+    build:
+      context: ./orchestrator
+    image: orchestrator
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    volumes:
+      - /tmp:/tmp
+
+networks:
+  vtep1:
