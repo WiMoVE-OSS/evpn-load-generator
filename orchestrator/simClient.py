@@ -61,13 +61,13 @@ class Client:
 
     def roam(self) -> None:
         print("Client " + self.id + " roaming")
-        msg = Message(self)
+        msg = Message(self, "ROAM")
         self.feed.send(msg)
 
     def connect(self) -> None:
         self.isConnected = True
         self.initKeepalive()
-        msg = Message(self)
+        msg = Message(self, "CONNECT")
         self.feed.send(msg)
         print("Client " + self.id + " connected")
 
@@ -78,5 +78,5 @@ class Client:
 
     def keepalive(self) -> None:
         print("Client " + self.id + " sending keepalive")
-        msg = Message(self.mac)
+        msg = Message(self.mac, "KEEPALIVE")
         self.feed.send(msg)

@@ -1,14 +1,14 @@
 import datetime
 from enum import Enum
-from simClient import Client
 
 class Operation(Enum):
     CONNECT = 1
     ROAM = 2
     DISCONNECT = 3
+    KEEPALIVE = 4
 
 class Message:
-    def __init__(self, client: Client, opCode: Operation):
+    def __init__(self, client, opCode: Operation):
         self.mac = client.mac
         self.username = client.id
         self.vni = client.vni

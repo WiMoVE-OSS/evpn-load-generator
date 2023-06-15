@@ -1,3 +1,4 @@
+import random
 from threading import Thread
 from simClient import Client
 from feed import Feed

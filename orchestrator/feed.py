@@ -70,3 +70,7 @@ class Feed:
                 conn = Client(self.getAddress(message.vtep))
                 packet = EtherPacket(message.mac,"12:34:56:78:90:12", message.vni)
                 conn.send(packet.toDict())
+            if message.operation == "KEEPALIVE":
+                conn = Client(self.getAddress(message.vtep))
+                packet = EtherPacket(message.mac,"12:34:56:78:90:12", message.vni)
+                conn.send(packet.toDict())
