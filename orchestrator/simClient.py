@@ -5,7 +5,7 @@ from feed import Feed
 from message import Message
 
 class Client:
-    isConnected = False;
+    ;
     def __init__(self, id: str, mac: str, feed: Feed, roamE = 60, connectE = 600, disconnectE = 600, vni = 1):
         self.mac = mac
         self.id = id
@@ -16,11 +16,12 @@ class Client:
         self.connectE = connectE
         self.disconnectE = disconnectE
         self.keepaliveRunning = False
+        self.isConnected = False
 
 
     def run(self) -> None:
         while True:
-            if not Client.isConnected:
+            if not self.isConnected:
                 self.disconnectedLoop()
             else:
                 self.connectedLoop()
@@ -34,7 +35,7 @@ class Client:
 
     def keepaliveLoop(self) -> None:
         while True:
-            if(Client.isConnected):
+            if(self.isConnected):
                 self.keepalive()
             time.sleep(60)
 
