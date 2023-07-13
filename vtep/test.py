@@ -38,7 +38,7 @@ def main():
         print("Environment is not configured properly!")
         exit(1)
     min_vni = int(min_vni)
-    max_vni = int(max_vni)
+    max_vni = int(max_vni) +1
     print("IP is: ", ip)
     print("VTEP_ID is: ", vtep_id)
     print("MIN_VNI is: ",min_vni)
@@ -89,7 +89,7 @@ def main():
             conn.send({"min_vni":min_vni, "max_vni":max_vni, "ip":ip})
             while True:
                 data = conn.recv()
-                print(data)
+                #print(data)
                 send_frame(sockets[data["vni"]], data["src"])
 
 
