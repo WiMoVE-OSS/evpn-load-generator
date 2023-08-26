@@ -23,4 +23,4 @@ class Client:
     def __init__(self, vni = 1):
         self.mac = generate_mac_address()
         self.vni = vni
-        self.vtep = None
+        self.vtep = 0

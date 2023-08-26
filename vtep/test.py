@@ -80,6 +80,8 @@ def main():
     with open('/etc/frr/frr.conf', 'w') as file:
         file.write(data)
 
+    # Fix bug that bgpd crashes with "fork failed: Cannot allocate memory"
+    os.system("echo 1 > /proc/sys/vm/overcommit_memory")
     # Start frr
     os.system("/usr/lib/frr/frrinit.sh start")
 

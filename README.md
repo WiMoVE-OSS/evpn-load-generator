@@ -37,7 +37,7 @@ Then, you want to set the `MIN_VTEP_ID` and `MAX_VTEP_ID` for the orchestrator i
 
 Now, you must create the directory for the sockets that are used to communicate between the orchestrator and the VTEPs using `mkdir /tmp/wmsim/`.
 
-All further configuration (i.e., the roaming interval) need to be done in the python code of the orchestrator.
+All further configuration (i.e., the roaming interval, the selected load scenario) need to be done in the python code of the orchestrator.
 
 Lastly, you will need to configure docker to disable firewall rules so that the VTEPs can communicate properly with the Route Reflector.
 To do this, you will need to modify the file `/etc/docker/daemon.json` and set the following properties there:

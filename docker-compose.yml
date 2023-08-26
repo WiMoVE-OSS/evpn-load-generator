@@ -31,6 +31,38 @@ services:
       - vtep1
     volumes:
       - /tmp:/tmp
+  vtep11:
+    environment:
+      - VTEP_ID=11
+      - MIN_VNI=101
+      - MAX_VNI=120
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  vtep12:
+    environment:
+      - VTEP_ID=12
+      - MIN_VNI=101
+      - MAX_VNI=120
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
   vtep3:
     environment:
       - VTEP_ID=3
@@ -63,6 +95,38 @@ services:
       - vtep1
     volumes:
       - /tmp:/tmp
+  vtep13:
+    environment:
+      - VTEP_ID=13
+      - MIN_VNI=21
+      - MAX_VNI=40
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  vtep14:
+    environment:
+      - VTEP_ID=14
+      - MIN_VNI=21
+      - MAX_VNI=40
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
   vtep5:
     environment:
       - VTEP_ID=5
@@ -79,9 +143,41 @@ services:
       - vtep1
     volumes:
       - /tmp:/tmp
+  vtep15:
+    environment:
+      - VTEP_ID=15
+      - MIN_VNI=41
+      - MAX_VNI=60
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
   vtep6:
     environment:
       - VTEP_ID=6
+      - MIN_VNI=41
+      - MAX_VNI=60
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  vtep16:
+    environment:
+      - VTEP_ID=16
       - MIN_VNI=41
       - MAX_VNI=60
     build:
@@ -127,6 +223,38 @@ services:
       - vtep1
     volumes:
       - /tmp:/tmp
+  vtep17:
+    environment:
+      - VTEP_ID=17
+      - MIN_VNI=61
+      - MAX_VNI=80
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  vtep18:
+    environment:
+      - VTEP_ID=18
+      - MIN_VNI=61
+      - MAX_VNI=80
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
   vtep9:
     environment:
       - VTEP_ID=9
@@ -146,6 +274,38 @@ services:
   vtep10:
     environment:
       - VTEP_ID=10
+      - MIN_VNI=81
+      - MAX_VNI=100
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  vtep19:
+    environment:
+      - VTEP_ID=19
+      - MIN_VNI=81
+      - MAX_VNI=100
+    build:
+      context: ./vtep
+    image: vtep
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_signal: SIGKILL
+    networks:
+      - vtep1
+    volumes:
+      - /tmp:/tmp
+  vtep20:
+    environment:
+      - VTEP_ID=20
       - MIN_VNI=81
       - MAX_VNI=100
     build:

@@ -5,9 +5,9 @@ from time import sleep
 import os
 from collections import defaultdict
 
-num_feeds = 35
+num_feeds = 10
 
-def getAddress(vtep: str) -> tuple:
+def getAddress(vtep: str):
     return (f"/tmp/wmsim/{vtep}.sock")
 
 min_vtep_id = os.environ.get(("MIN_VTEP_ID"))
@@ -34,7 +34,7 @@ for i in range(int(min_vtep_id), int(max_vtep_id)):
     connections[i] = conn
 print("Established all connections")
 
-feeds = [Feed(vnis, connections, 50000, 25) for i in range(num_feeds)]
+feeds = [Feed(vnis, connections, 40000, 25, True) for i in range(num_feeds)]
 
 threads = []
 
